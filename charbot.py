@@ -1,6 +1,7 @@
 from telegram.ext import Application
 from decouple import config
 import helpers.worker as w
+from datetime import datetime, timedelta, timezone
 
 
 TOKEN = config('TELEGRAM_API')
@@ -26,7 +27,8 @@ async def send_message_poll(context):
     
     question = "Where will the price go?"
     options = ["Up", "Flat", "Down"]
-    await bot.send_poll(chat_id=CHANNEL_ID, question=question, options=options, is_anonymous=True, allows_multiple_answers=False, open_period=23*60*60)
+    close_date = datetime.now(timezone.utc) + timedelta(hours=24)
+    await bot.send_poll(chat_id=CHANNEL_ID, question=question, options=options, is_anonymous=True, allows_multiple_answers=False, close_date=close_date)
 
 
 def main():
