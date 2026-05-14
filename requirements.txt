@@ -1,0 +1,6 @@
+python-decouple
+python-telegram-bot[job-queue]
+numpy
+pandas
+matplotlib
+mplfinance
